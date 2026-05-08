@@ -38,6 +38,43 @@ services:
     depends_on:
       - caronte
 
+  destructivefarm:
+    build:
+      dockerfile: Dockerfile_DF
+#    image: ''
+    volumes:
+      - ./DestructiveFarm/server/db:/server/db
+    ports:
+      - "5000:5000"
+    environment:
+      DF_FLAG_FORMAT: '[A-Z0-9]{31}='
+
+      # This configures how and where to submit flags.
+      # The protocol must be a module in protocols/ directory.
+      DF_SYSTEM_PROTOCOL: 'ccit_http'
+      DF_FLAG_ENDPOINT: 'http://10.10.0.1:8080/flags'
+      DF_FLAG_ID_ENDPOINT: 'http://10.10.0.1:8081/flagIds'
+      DF_TEAM_LIST_ENDPOINT: 'http://10.10.0.1:8081/'
+#      DF_SYSTEM_PORT: ''
+#      DF_SYSTEM_URL: ''
+      DF_SYSTEM_TOKEN: 'tokentokentoken'
+#      DF_TEAM_TOKEN: ''
+
+      DF_ROUND_DURATION: 120
+
+      # The server will submit not more than SUBMIT_FLAG_LIMIT flags
+      # every SUBMIT_PERIOD seconds. Flags received more than
+      # FLAG_LIFETIME seconds ago will be skipped.
+      DF_SUBMIT_FLAG_LIMIT: 2000
+      DF_SUBMIT_PERIOD: 30
+      DF_FLAG_LIFETIME: 600
+
+      # Password for the web interface. You can use it with any login.
+      #DF_SERVER_PASSWORD: 1234
+
+      # Use authorization for API requests
+      #DF_API_TOKEN: '00000000000000000000'
+
 networks:
   acheronet:
 
