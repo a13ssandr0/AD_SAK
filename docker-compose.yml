@@ -26,7 +26,7 @@ services:
       # vm_init.sh config
       FLAG_FORMAT: "[A-Z0-9]{31}="
       USER: "root"
-      PASS: "72a39b1f52e8992109ef2c9fd38db05a"
+      PASS: "passwordpasswordpassword"
       HOST: "10.60.58.1"
 
       # pcapper.sh config
