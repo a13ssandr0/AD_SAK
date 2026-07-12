@@ -82,6 +82,17 @@ outdir = Path(os.environ["OUTDIR"])
 iface = os.environ.get("IFACE", "game")
 interval = int(os.environ["INTERVAL"])
 
+# Create the directory
+try:
+    outdir.mkdir()
+    print(f"Directory '{outdir}' created successfully.")
+except FileExistsError:
+    print(f"Directory '{outdir}' already exists.")
+except PermissionError:
+    print(f"Permission denied: Unable to create '{outdir}'.")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
 print("Starting capture on", os.environ)
 print("Captures saved in", outdir)
 print("Captures updated each", interval, "seconds")
